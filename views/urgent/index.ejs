@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/images/ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>紧急电话</title>
+    <style>
+        .urgent-box {
+            position: absolute;
+            background: #F3F3F3;
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            user-select: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .urgent-name {
+            color: #999;
+            font-size: .8rem;
+            padding: .7rem .5rem .3rem .5rem;
+        }
+
+        .urgent-list {
+            color: #333;
+            padding: .8rem .5rem;
+            margin-top: .4rem;
+            background: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-decoration: none;
+            /* out-line: none; */
+        }
+
+        .urgent-list:hover {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .urgent-list:active {
+            opacity: .8;
+        }
+
+        .urgent-icon img {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="urgent-box">
+        <% for(var i=0;i<rows.length;i++) { %>
+        <div class="urgent-name">
+            <%=rows[i].name%>
+        </div>
+        <div>
+            <% for(var j=0;j<rows[i].obj.length;j++) { %>
+            <a class="urgent-list" href="tel:<%=rows[i].obj[j].phone%>">
+                <div><%=rows[i].obj[j].title%> <%=rows[i].obj[j].phone%></div>
+                <div class="urgent-icon">
+                    <img src="/images/icon_urgent_phone.png" alt="">
+                </div>
+            </a>
+            <% } %>
+        </div>
+        <% } %>
+    </div>
+</body>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/base.js"></script>
+
+</html>

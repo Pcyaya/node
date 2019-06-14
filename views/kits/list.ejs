@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" >
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/images/ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title>生存锦囊</title>
+    <style>
+        .kits-list {
+            position: absolute;
+            overflow: auto;
+            background: url(/images/bg_scjn.png);
+            background-size: cover;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            height: 100%;
+        }
+
+        .kits-list>.list-item {
+            margin: .3rem .7rem;
+            position: relative;
+            padding: .85rem;
+            border-radius: .2rem;
+        }
+        .kits-list>.list-item:active {
+            opacity: .8;
+        }
+        .kits-list>.list-item:first-child {
+            margin-top: .6rem;
+        }
+        .kits-list .list-item .tit {
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .kits-list .list-item .cont {
+            font-size: .85rem;
+            margin-top: .3rem;
+            color: rgba(255, 255, 255, .5);
+        }
+
+        .length-hide {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .urgent {
+            position: fixed;
+            right: .6rem;
+            bottom: 2.5rem;
+            width: 5rem;
+            height: 5rem;
+        }
+        .urgent:active {
+            opacity: .9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="kits-list">
+        <% for(var i = 0;i < rows.length; i++ ) { %>
+            <div class="list-item" id="<%= rows[i].rs_id %>" num="<%=i %>" tit="<%= rows[i].rs_title %>">
+                <div class="tit length-hide"><%= rows[i].rs_title %></div>
+                <div class="cont length-hide">
+                        <%= rows[i].rs_content %>
+                </div>
+            </div>
+        <% } %>
+        <img class="urgent" src="/images/icon_call.png" alt="">
+    </div>
+</body>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/base.js"></script>
+<script>
+    $(function() {
+        var bgUrl = ["/images/drawable-xxhdpi/icon_bg01.png",
+            "/images/drawable-xxhdpi/icon_bg02.png",
+            "/images/drawable-xxhdpi/icon_bg03.png",
+            "/images/drawable-xxhdpi/icon_bg04.png",
+            "/images/drawable-xxhdpi/icon_bg05.png",
+            "/images/drawable-xxhdpi/icon_bg06.png",
+            "/images/drawable-xxhdpi/icon_bg07.png",
+            "/images/drawable-xxhdpi/icon_bg08.png",
+            "/images/drawable-xxhdpi/icon_bg09.png"];
+        var bgUrls = [];
+        var bgDom = $('.list-item');
+        var count = '<%=count%>'
+        var lengths = count%bgDom.length == 0 ? count/bgUrl.length : Math.ceil(5/2);
+        for(let i=0;i<lengths;i++) {
+            bgUrls = bgUrls.concat(bgUrl);
+        }
+        for(let i=0;i<count;i++) {
+            bgDom.eq(i).css({
+                "background":"url("+bgUrls[i]+")",
+                "background-size": "cover",
+            })
+        }
+        bgDom.on("click",GetInfo);
+        $('.urgent').on("click",GetCall);
+    });
+    function GetInfo() {
+        let thatDom = $(this);
+        let str = `?id=${thatDom.attr('id')}&num=${thatDom.attr('num')}`
+        // console.log(str)
+        window.location.href='/kits/info'+str;
+    }
+    function GetCall() {
+        window.location.href= '/kits/urgent';
+    }
+
+</script>
+
+</html>

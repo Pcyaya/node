@@ -1,0 +1,8 @@
+{
+    "host": "aetosgo.cn",
+    "port": "8880",
+    "user": "root",
+    "password": "RunYee_123",
+    "database": "anygo",
+    "multipleStatements": true  
+}

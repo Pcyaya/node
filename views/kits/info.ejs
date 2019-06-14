@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="/images/ico.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <title><%=rows.title %></title>
+    <style>
+        .kits-info {
+            position: absolute;
+            overflow: auto;
+            background: url(/images/bg_scjn.png);
+            background-size: cover;
+            -webkit-overflow-scrolling: touch;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+        }
+
+        .info-title {
+            display: inline-block;
+            /* background: #5395D2; */
+            padding: .5rem 2rem .5rem 1rem;
+            margin-top: 2rem;
+            border-radius: 0 50px 50px 0;
+            box-shadow: 1px 1px 5px rgba(100, 100, 100, .5);
+        }
+
+        .info-box {
+            padding: 1rem .7rem;
+        }
+
+        .info-tit {
+            margin-top: 1rem;
+        }
+
+        .info-cont {
+            font: .9rem "Lucida Grande", Helvetica, Arial, sans-serif;
+            font-size: .9rem;
+            margin-top: .5rem;
+            width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .info-state {
+            color: #999;
+            font-size: .5rem;
+            margin-top: 2rem;
+        }
+        .urgent {
+            position: fixed;
+            right: .6rem;
+            bottom: 2.5rem;
+            width: 5rem;
+            height: 5rem;
+        }
+        .urgent:active {
+            opacity: .9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="kits-info">
+        <div class="info-title">
+            <%=rows.title %>
+        </div>
+        <div class="info-box">
+            <% rows.obj.forEach(function(item){%>
+            <%if(item.title != null){ %>
+            <div class="info-tit"><%=item.title %></div>
+            <% }%>
+            <pre class="info-cont"><%=item.content %></pre>
+            <% }) %>
+            <div class="info-state">声明 ： 该文来源于网络，不代表艾侗游的立场，艾侗游仅提供信息存储空间服务。</div>
+        </div>
+        <img class="urgent" src="/images/icon_call.png" alt="">
+    </div>
+</body>
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/javascripts/base.js"></script>
+<script>
+    var titleColor = ['#5395D3', '#77CAEE', '#F07883', '#77CF9F', '#AAAAAA', '#DC917B', '#F4C677', '#BE83D2', '#CBB593'];
+    $('.info-title').css({ "background": titleColor["<%=num %>" % titleColor.length] })
+    $('.urgent').on("click",GetCall);
+    function  GetCall() {
+        window.location.href= '/kits/urgent';
+    }
+</script>
+
+</html>
